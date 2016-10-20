@@ -5,7 +5,7 @@ class TweetsController < ApplicationController
 	include IdolApi
 	include TwitterApi
 
-	TWEET_COUNT = 100
+	TWEET_COUNT = 500
 	
 	def index
 		# Configure the number of tweets to be fetched in the TWEET_COUNT.
@@ -14,7 +14,7 @@ class TweetsController < ApplicationController
 	    @negative_result = []
 	    @neutral_result = []
 	    counter = 0
-			@tweets = search_tweets(params[:hashtag], param_values(params))#.take(TWEET_COUNT)
+			@tweets = search_tweets(params[:hashtag], param_values(params)).take(TWEET_COUNT)
 			@tweets.each do |tweet|
 				sentimental = get_sentimental(tweet.text)
 				@positive_result << tweet.as_json.merge!(sentimental: sentimental) if sentimental[:sentiment] == "positive"
