@@ -22,7 +22,7 @@ module TwitterApi
 		end
 
 		private
-			def fetch_hashtag(hashtag, include_rts)
+			def fetch_hashtag(hashtag, include_rts=false)
 				hashtag = hashtag.blank? ? "@quovantis" : hashtag
 				if include_rts
 					hashtag[0].eql?("#") ? "#{hashtag}" : "##{hashtag}"
