@@ -23,8 +23,8 @@ class TweetsController < ApplicationController
 				counter+=1
 			end
 			@positive_percent = (@positive_result.count * 100 )/counter
-			@negative_percent = (@positive_result.count * 100 )/counter
-			@neutral_percent = (@positive_result.count * 100 )/counter
+			@negative_percent = (@negative_result.count * 100 )/counter
+			@neutral_percent = (@neutral_result.count * 100 )/counter
 			p "--------#{counter}"
 	end
 
