@@ -1,0 +1,126 @@
+<div class="container">
+  <br>
+  <%= form_tag tweets_path, :id => "tweets_filter", :method => :get do %>
+  	<% default = params[:hashtag].blank? ? "@quovantis" : params[:hashtag] %>
+
+    <%= text_field_tag :hashtag, params[:hashtag], :value => default %>
+   
+   	<%#= text_field_tag :date_range, "" %>
+
+    <%= submit_tag "view",:class => "btn btn-primary", :id => "tweet_btn", "data-loading-text" => "Fetching" %><br>
+    
+    <%#= check_box_tag :include_rts, params[:include_rts], params[:include_rts] %> Include retweets
+  <% end %>
+	<div>
+   <h1>Positive: <%=  @positive_percent.to_s+"%"%></h1> 
+   <h1>Negative: <%=  @negative_percent.to_s+"%"%></h1> 
+   <h1>Neutral: <%=  @neutral_percent.to_s+"%"%></h1> 
+  </div>
+
+  <br>
+    <h4>Positive Tweets</h4>
+    <%= render partial: "tweets", locals: { results: @positive_result } %> 
+    <h4>Negative Tweets</h4>
+    <%= render partial: "tweets", locals: { results: @negative_result } %>  
+    <h4>Neutral Tweets</h4>
+    <%= render partial: "tweets", locals: { results: @neutral_result } %>   
+</div>
+
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery("#date_range").daterangepicker({
+      earliestDate: Date.parse('1/12/2013'),
+      latestDate: new Date(),
+      presetRanges: [      
+        {text: "Last 2 days", dateStart: 'Today-3', dateEnd: 'Today' },
+        {text: "Last 7 days",dateStart: 'Today-8',  dateEnd: 'Today'}
+      ],
+      presets: {
+        dateRange: "Custom filter"
+      },
+      dateFormat: 'dd M yy',
+      closeOnSelect: true,
+      onClose: function() {
+        jQuery('#date_range').trigger('change');
+      }
+    });
+    <% if params[:date_range].present? %>
+      jQuery("#date_range").val('<%= params[:date_range] %>');   
+    <% else %>
+      jQuery("#date_range").val('<%= 7.days.ago.strftime("%d %b %Y") %> - <%= Time.now.strftime("%d %b %Y") %>')
+    <% end %>
+
+
+    jQuery('#date_range').bind('keypress keyup keydown', function(ev) {
+      ev.preventDefault();
+      return false;
+    });
+  });
+  
+  // $(window).bind("load", function() {
+	
+    // $(".language").each(function() {
+  //     $(this)[0].innerHTML = "Loading..."
+  //     processApi($(this), $(this), "identifylanguage")
+  //   });
+    
+
+  //   $(".sentiment").each(function() {
+  //     score_element = $(this).siblings(".sentiment_score") ;
+  //     score_element[0].innerHTML = "Loading..."
+  //     $(this)[0].innerHTML = "Loading..."
+  //     processApi($(this), score_element, "detectsentiment")
+		// });
+
+  // });
+
+  // processApi = function(element, score_element, api){
+  //   var text =  element.siblings(".tweet").children("a")[0].innerHTML;
+
+  //   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  //   var regex = new RegExp(expression);
+  //   var links = text.match(regex)
+
+  //   if(links){
+  //     $.each(links, function(index, value){ text = text.replace(value, "") });
+  //   }
+  //   text = text.replace(/#/g, "")
+
+  //   var base_url = "<%#= IdolApiConfig["url"] %>/" + api + "/<%#= IdolApiConfig["version"] %>"
+  //   var url = base_url + "?apikey=" + "<%#= IdolApiConfig["api_key"] %>" + "&text=" + text + "ex"
+  //   console.log(url);
+  //   url = encodeURI(url);
+
+  //   $.getJSON(url, {}, function(result){
+  //     if(api === "detectsentiment"){
+  //       score_element[0].innerHTML = (result.aggregate.score*100).toFixed(2) + "%";
+  //       displayIcon(element, result.aggregate.sentiment)        
+  //     }
+  //     if(api === "identifylanguage"){
+  //       element[0].innerHTML = result.language;
+  //     }
+  //   });
+  // };
+
+  // displayIcon = function(element, sentiment){
+  //   if(sentiment === "positive"){
+  //     element[0].innerHTML = "<img src='/assets/positive.png' />"
+  //   }
+  //   if(sentiment === "negative"){
+  //     element[0].innerHTML = "<img src='/assets/negative.png' />"
+  //   }
+  //   if(sentiment === "neutral"){
+  //     element[0].innerHTML = "<img src='/assets/neutral.png' />"
+  //   }
+  // }
+  
+  jQuery('#tweets_filter').submit(function () {
+    if (jQuery(this).valid()) {      
+      jQuery("#tweet_btn").button('loading');
+    }
+  });
+
+</script>
+
