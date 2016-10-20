@@ -33,17 +33,21 @@ module TwitterApi
 			end
 
 			def query_params(param_values)
-				params = {
-					:since => param_values[:since_date].strftime("%Y-%m-%d"),
-					:until => param_values[:until_date].strftime("%Y-%m-%d"),
-					:max_id => param_values[:max_id] # This param fetches tweets older than the given tweet ID
-				}
+				# params = {
+				# 	:since => param_values[:since_date].strftime("%Y-%m-%d"),
+				# 	:until => param_values[:until_date].strftime("%Y-%m-%d"),
+				# 	:max_id => param_values[:max_id] # This param fetches tweets older than the given tweet ID
+				# }
 
+				params = {
+					:since => DateTime.now.strftime("%Y-%m-%d"),
+					:until => (DateTime.now-365.days).strftime("%Y-%m-%d")
+				}
 				
 				# When 'until' param(YYYY-MM-DD) is sent, Twitter API returns tweets created before YYYY-MM-DD"00:00:00". 
 				# So the latest tweets are not fetched when you choose until params as Time.now.
 				# This small hack below removes until param when until time is set to today.
-				params.delete_if{|k, v| k.eql?(:until) and v.eql?(Time.now.strftime("%Y-%m-%d")) }
+				# params.delete_if{|k, v| k.eql?(:until) and v.eql?(Time.now.strftime("%Y-%m-%d")) }
 			end	
 			
 end

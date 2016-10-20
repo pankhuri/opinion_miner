@@ -75,6 +75,7 @@ class TweetsController < ApplicationController
 
 	  def get_sentimental text
 			analyzer = Sentimental.new
+			analyzer.load_defaults
 			sentiment = analyzer.sentiment text
 			score = analyzer.score text
 			data = {sentiment: sentiment.to_s, score: score}
