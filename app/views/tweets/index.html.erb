@@ -60,61 +60,61 @@
   });
   
   // $(window).bind("load", function() {
-	
-    // $(".language").each(function() {
-  //     $(this)[0].innerHTML = "Loading..."
-  //     processApi($(this), $(this), "identifylanguage")
-  //   });
-    
-
-  //   $(".sentiment").each(function() {
-  //     score_element = $(this).siblings(".sentiment_score") ;
-  //     score_element[0].innerHTML = "Loading..."
-  //     $(this)[0].innerHTML = "Loading..."
-  //     processApi($(this), score_element, "detectsentiment")
-		// });
-
-  // });
-
-  // processApi = function(element, score_element, api){
-  //   var text =  element.siblings(".tweet").children("a")[0].innerHTML;
-
-  //   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-  //   var regex = new RegExp(expression);
-  //   var links = text.match(regex)
-
-  //   if(links){
-  //     $.each(links, function(index, value){ text = text.replace(value, "") });
-  //   }
-  //   text = text.replace(/#/g, "")
-
-  //   var base_url = "<%#= IdolApiConfig["url"] %>/" + api + "/<%#= IdolApiConfig["version"] %>"
-  //   var url = base_url + "?apikey=" + "<%#= IdolApiConfig["api_key"] %>" + "&text=" + text + "ex"
-  //   console.log(url);
-  //   url = encodeURI(url);
-
-  //   $.getJSON(url, {}, function(result){
-  //     if(api === "detectsentiment"){
-  //       score_element[0].innerHTML = (result.aggregate.score*100).toFixed(2) + "%";
-  //       displayIcon(element, result.aggregate.sentiment)        
-  //     }
-  //     if(api === "identifylanguage"){
-  //       element[0].innerHTML = result.language;
-  //     }
-  //   });
-  // };
-
-  // displayIcon = function(element, sentiment){
-  //   if(sentiment === "positive"){
-  //     element[0].innerHTML = "<img src='/assets/positive.png' />"
-  //   }
-  //   if(sentiment === "negative"){
-  //     element[0].innerHTML = "<img src='/assets/negative.png' />"
-  //   }
-  //   if(sentiment === "neutral"){
-  //     element[0].innerHTML = "<img src='/assets/neutral.png' />"
-  //   }
-  // }
+ //
+ //    $(".language").each(function() {
+ //      $(this)[0].innerHTML = "Loading..."
+ //      processApi($(this), $(this), "identifylanguage")
+ //    });
+ //
+ //
+ //    $(".sentiment").each(function() {
+ //      score_element = $(this).siblings(".sentiment_score") ;
+ //      score_element[0].innerHTML = "Loading..."
+ //      $(this)[0].innerHTML = "Loading..."
+ //      processApi($(this), score_element, "detectsentiment")
+ // 		});
+ //
+ //  });
+ //
+ //  processApi = function(element, score_element, api){
+ //    var text =  element.siblings(".tweet").children("a")[0].innerHTML;
+ //
+ //    var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+ //    var regex = new RegExp(expression);
+ //    var links = text.match(regex)
+ //
+ //    if(links){
+ //      $.each(links, function(index, value){ text = text.replace(value, "") });
+ //    }
+ //    text = text.replace(/#/g, "")
+ //
+ //    var base_url = "<%#= IdolApiConfig["url"] %>/" + api + "/<%#= IdolApiConfig["version"] %>"
+ //    var url = base_url + "?apikey=" + "<%#= IdolApiConfig["api_key"] %>" + "&text=" + text + "ex"
+ //    console.log(url);
+ //    url = encodeURI(url);
+ //
+ //    $.getJSON(url, {}, function(result){
+ //      if(api === "detectsentiment"){
+ //        score_element[0].innerHTML = (result.aggregate.score*100).toFixed(2) + "%";
+ //        displayIcon(element, result.aggregate.sentiment)
+ //      }
+ //      if(api === "identifylanguage"){
+ //        element[0].innerHTML = result.language;
+ //      }
+ //    });
+ //  };
+ //
+ //  displayIcon = function(element, sentiment){
+ //    if(sentiment === "positive"){
+ //      element[0].innerHTML = "<img src='/assets/positive.png' />"
+ //    }
+ //    if(sentiment === "negative"){
+ //      element[0].innerHTML = "<img src='/assets/negative.png' />"
+ //    }
+ //    if(sentiment === "neutral"){
+ //      element[0].innerHTML = "<img src='/assets/neutral.png' />"
+ //    }
+ //  }
   
   jQuery('#tweets_filter').submit(function () {
     if (jQuery(this).valid()) {      

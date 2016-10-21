@@ -10,7 +10,9 @@
 		  <% results.each do |tweet| %>
 		    <tr>
 					<td class="tweet"><%= link_to(tweet["text"], tweet_path(tweet["id"])) %></td>
-					<td class="tweet_created"><%= tweet["created_at"] %></td>						
+					<td class="tweet_created"><%= tweet["created_at"] %></td>		
+					<td class="sentiment"><%= tweet[:sentimental][:sentiment] %></td>
+									
 					<td class="sentiment"><%= image_tag get_image(tweet[:sentimental][:sentiment]) %></td>
         <td class="sentiment_score"><%= tweet[:sentimental][:score].round(2) %></td>
 		    </tr>
