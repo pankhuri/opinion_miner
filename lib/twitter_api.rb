@@ -13,7 +13,7 @@ module TwitterApi
 		# Search tweets with a given hashtag
 		def search_tweets(hashtag, param_values)			
 			hashtag = fetch_hashtag(hashtag, param_values[:include_rts])			
-			client.search(hashtag || "@quovantis")#, query_params(param_values))
+			client.search(hashtag || "@quovantis", query_params(param_values))
 		end
 
 		# Fetch a particular tweet with ID
@@ -24,12 +24,7 @@ module TwitterApi
 		private
 			def fetch_hashtag(hashtag, include_rts=false)
 				hashtag = hashtag.blank? ? "@quovantis" : hashtag
-				if include_rts
-					hashtag[0].eql?("#") ? "#{hashtag}" : "##{hashtag}"
-				else
-					# Search without the word 'RT' in the tweet.
-					hashtag[0].eql?("#") ? "#{hashtag} -RT" : "##{hashtag} -RT"
-				end
+				hashtag[0].eql?("#") ? "#{hashtag} -RT" : "##{hashtag} -RT"
 			end
 
 			def query_params(param_values)
@@ -39,10 +34,7 @@ module TwitterApi
 				# 	:max_id => param_values[:max_id] # This param fetches tweets older than the given tweet ID
 				# }
 
-				params = {
-					:since => DateTime.now.strftime("%Y-%m-%d"),
-					:until => (DateTime.now-365.days).strftime("%Y-%m-%d")
-				}
+				params = {:since => (DateTime.now-5.days).strftime("%Y-%m-%d"), :until => (DateTime.now).strftime("%Y-%m-%d")}
 				
 				# When 'until' param(YYYY-MM-DD) is sent, Twitter API returns tweets created before YYYY-MM-DD"00:00:00". 
 				# So the latest tweets are not fetched when you choose until params as Time.now.
@@ -51,3 +43,5 @@ module TwitterApi
 			end	
 			
 end
+
+

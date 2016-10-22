@@ -14,7 +14,8 @@ class TweetsController < ApplicationController
 	    @negative_result = []
 	    @neutral_result = []
 	    counter = 0
-			@tweets = search_tweets(params[:hashtag], param_values(params)).take(TWEET_COUNT)
+			@tweets = search_tweets(params[:hashtag], param_values(params))#.take(TWEET_COUNT)
+			# render json: @tweets
 			@tweets.each do |tweet|
 				sentimental = get_sentimental(tweet.text)
 				@positive_result << tweet.as_json.merge!(sentimental: sentimental) if sentimental[:sentiment] == "positive"

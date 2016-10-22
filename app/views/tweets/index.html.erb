@@ -9,12 +9,10 @@
 
     <%= submit_tag "view",:class => "btn btn-primary", :id => "tweet_btn", "data-loading-text" => "Fetching" %><br>
     
-    <%#= check_box_tag :include_rts, params[:include_rts], params[:include_rts] %> Include retweets
+    <%#= check_box_tag :include_rts, params[:include_rts], params[:include_rts] %> 
   <% end %>
 	<div>
-   <h1>Positive: <%=  @positive_percent.to_s+"%"%></h1> 
-   <h1>Negative: <%=  @negative_percent.to_s+"%"%></h1> 
-   <h1>Neutral: <%=  @neutral_percent.to_s+"%"%></h1> 
+   <span>Positive: <%=  @positive_percent.to_s+"%"%></span>,<span>Negative: <%=  @negative_percent.to_s+"%"%></span>,<span>Neutral: <%=  @neutral_percent.to_s+"%"%></span>
   </div>
 
   <br>

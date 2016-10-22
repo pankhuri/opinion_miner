@@ -1,24 +1,39 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
+# Mysql Setting
+
+# default: &default
+#   adapter: mysql2
+#   #encoding: unicode
+#   pool: 5
+#   username: root
+#   password: 
+#   host: localhost
+
+# development:
+#   <<: *default
+#   database: miner_development
+
+# test:
+#   <<: *default
+#   database: miner_test
+
+# production:
+#   <<: *default
+#   database: miner_production
+
+#Postgres Setting
+
 default: &default
-  adapter: mysql2
-  #encoding: unicode
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: root
-  password: 
+  username: postgres
+  password: postgres
   host: localhost
 
 development:
   <<: *default
   database: miner_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
   database: miner_test
@@ -26,4 +41,3 @@ test:
 production:
   <<: *default
   database: miner_production
-
